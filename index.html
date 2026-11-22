@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b1319">
+  <meta name="description" content="Rule Eldoria, a living fantasy-industrial 3D kingdom. Consult the ministries, govern citizens, and advance history one year at a time.">
+  <title>Eldoria · The Living Kingdom</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700;800&display=swap');
+:root{color-scheme:dark;--bg:#0b141a;--panel:#101e25;--panel2:#14242a;--inset:#0d191e;--border:#2b3c42;--border2:#344749;--gold:#cfad72;--goldbright:#e5c58c;--text:#edf1ed;--dim:#9aa7a5;--muted:#718584;--green:#83ba9e;--red:#d19b89;--serif:'Cinzel',Georgia,serif;--sans:'DM Sans',system-ui,-apple-system,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:330px;background:radial-gradient(ellipse at 20% 0%,#132329 0%,var(--bg) 52%);color:var(--text);font-family:var(--sans);font-size:14px}button,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.35;cursor:not-allowed}button:focus-visible,input:focus-visible,tr:focus-visible{outline:2px solid var(--goldbright);outline-offset:2px}button:active:not(:disabled){transform:translateY(1px)}a{color:var(--gold)}.app{max-width:1800px;margin:auto;padding:0 30px}.muted{color:var(--dim)}.topbar{height:90px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);gap:12px}.identity,.top-actions,.top-center{display:flex;align-items:center}.identity{gap:15px}.sigil{width:46px;height:52px;display:grid;place-items:center;color:var(--gold);font-family:var(--serif);font-size:26px;border:1px solid #7d674c;border-radius:3px;box-shadow:inset 0 0 0 3px #14212a}.brand-overline{font-family:var(--serif);font-size:9px;letter-spacing:3.1px;color:#bdac8e}.brand{font-family:var(--serif);font-weight:700;letter-spacing:4px;font-size:24px;color:var(--goldbright);white-space:nowrap}.brand small{font-family:var(--sans);font-size:8px;font-weight:700;letter-spacing:2px;color:#7f999a;vertical-align:middle;margin-left:9px}.top-center{gap:11px;font-size:10px;letter-spacing:1.35px;font-weight:700}.status-dot{display:inline-block;width:6px;height:6px;border-radius:100%;background:#87bf9c;box-shadow:0 0 9px #6caf83a1}.live{color:#90c9a9}.top-actions{gap:15px}.year-marker{display:flex;flex-direction:column;align-items:center;color:var(--muted);font-size:9px;letter-spacing:2px}.year-marker b{font-size:19px;color:var(--text);font-family:var(--serif);letter-spacing:1px}.small-ghost{border:0;background:transparent;color:var(--dim);padding:11px;white-space:nowrap}.small-ghost:hover,.text-button:hover{color:var(--goldbright)}.button-primary{background:linear-gradient(120deg,#ba9056,#d3b482);border:1px solid #ebc992;color:#1d2527;font-weight:800;padding:15px 20px;letter-spacing:.1px;border-radius:3px;box-shadow:0 3px 18px #0003;white-space:nowrap;display:flex;gap:18px;align-items:center}.button-primary:hover{filter:brightness(1.08)}.button-primary strong{font-size:19px}.summary-band{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));padding:23px 0;gap:0}.summary-stat{display:flex;align-items:center;gap:13px;padding:0 19px;border-right:1px solid var(--border);min-width:0}.summary-stat:first-child{padding-left:3px}.summary-stat:last-child{border:0}.stat-icon{color:#bba77e;font-family:var(--serif);font-size:27px;width:27px;flex:0 0 27px;text-align:center}.summary-stat>div{min-width:0}.summary-stat span:not(.stat-icon){display:block;color:var(--dim);font-size:9px;font-weight:800;letter-spacing:1.55px;white-space:nowrap}.summary-stat strong{display:block;font:600 24px/1.35 var(--serif);color:var(--text)}.summary-stat small{font-size:11px;color:var(--muted);white-space:nowrap}.top-grid{display:grid;grid-template-columns:minmax(0,1.82fr) minmax(300px,.82fr);gap:17px}.panel{background:linear-gradient(155deg,#14232a,#101c22);border:1px solid var(--border);border-radius:6px;min-width:0;overflow:hidden}.panel-heading{padding:22px 25px 17px;display:flex;justify-content:space-between;align-items:center;gap:12px}.section-label,.tagline{font-size:9px;font-weight:800;letter-spacing:2.1px;color:var(--gold);text-transform:uppercase}.divider-star{font-size:12px;margin-right:5px}h1,h2,h3,h4,p{margin:0}h1,h2{font-family:var(--serif);font-size:23px;letter-spacing:.3px;font-weight:500}h1 em{color:var(--gold);font-style:normal}.pill{font-size:9px;letter-spacing:1.2px;font-weight:800;color:#a1cbb5;background:#1a302e;border:1px solid #34514c;padding:9px;border-radius:3px;white-space:nowrap;display:flex;align-items:center;gap:9px}.world-frame{height:505px;position:relative;background:radial-gradient(ellipse at 50% 40%,#1c3437,#0b161b);margin:0 17px;border:1px solid #344b4c;overflow:hidden;cursor:grab}.world-frame:active{cursor:grabbing}#villageCanvas{width:100%;height:100%;display:block;touch-action:none}.world-fallback{position:absolute;inset:0;display:grid;place-items:center;color:var(--dim);padding:30px;text-align:center;background:#11242c;z-index:2}.world-fallback[hidden]{display:none}.world-note{position:absolute;bottom:18px;left:19px;background:#0b1519ba;backdrop-filter:blur(5px);padding:9px 12px;display:flex;gap:10px;align-items:center;color:#b6c5c4;font-size:9px;font-weight:700;letter-spacing:1px;border:1px solid #345157;border-radius:2px;pointer-events:none}.mini-square{font-size:15px;color:var(--gold)}.world-controls{position:absolute;right:16px;top:18px;display:flex;flex-direction:column;gap:6px}.world-controls button{border:1px solid #43585d;background:#132329da;color:#e3e6e1;border-radius:3px;width:34px;height:34px;font-size:19px}.world-controls button:hover{background:#31464a}.map-compass{position:absolute;top:18px;left:18px;border-radius:50%;width:53px;height:53px;border:1px solid #b49e77b0;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#0b171caa;color:var(--gold);line-height:1.1;pointer-events:none}.map-compass strong,.map-compass small{font-size:9px}.map-compass span{font-size:16px}.world-flair{position:absolute;bottom:18px;right:20px;font:600 10px var(--serif);letter-spacing:1.2px;color:#e4d3ac;text-shadow:0 2px 5px #111;pointer-events:none}.map-foot{padding:13px 20px;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:12px}.foot-year{font-size:10px;letter-spacing:1.5px;color:var(--muted);white-space:nowrap}.selected-map{display:flex;align-items:center;gap:11px}.selected-icon{display:grid;place-items:center;border:1px solid #685a47;width:38px;height:38px;color:var(--gold);font-size:23px}.selected-map strong{display:block}.selected-map small{color:var(--muted)}.text-button{background:transparent;border:0;color:var(--gold);font-weight:800;font-size:11px;letter-spacing:.1px;white-space:nowrap}.gold-glyph{font-size:29px;color:var(--gold)}.royal-notice{background:#1e2929;border-top:1px solid #445144;border-bottom:1px solid #445144;display:flex;align-items:center;gap:13px;padding:17px 22px;margin:0 17px 15px}.notice-icon{font-size:27px;color:#ceb07a}.royal-notice b{font:500 13px var(--serif)}.royal-notice p{font-size:11px;color:var(--dim);margin-top:4px}.royal-notice p strong{color:#dbc69d}.report-label{display:flex;justify-content:space-between;padding:10px 20px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:1.4px}.ministry-nav{margin:0 12px}.ministry-link{display:flex;align-items:center;gap:12px;width:100%;padding:15px 10px;border:0;border-top:1px solid #2b3b3e;background:transparent;text-align:left;color:var(--text)}.ministry-link.selected{background:linear-gradient(90deg,#3d3d31aa,#24332e40);border-left:2px solid var(--gold);padding-left:8px}.ministry-link:hover{background:#203136}.ministry-emoji{font-size:22px;color:var(--gold);width:24px;text-align:center}.ministry-link-body{flex:1;min-width:0}.ministry-link-body strong{display:block;font-weight:700;font-size:12px}.ministry-link-body small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.ministry-metric{font-size:10px;color:#b6c9bd;white-space:nowrap;max-width:112px;text-overflow:ellipsis;overflow:hidden}.ministry-metric.warning{color:#dbb28e}.ministry-arrow{font-size:22px;color:#778582}.council-footer{margin:20px 17px 15px;padding:15px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px}.tiny{display:block;color:var(--muted);font-size:9px;letter-spacing:1.3px;margin-bottom:4px}.council-footer strong{font-size:11px}.lower{margin-top:17px;scroll-margin-top:12px}.lower-header{display:flex;align-items:end;justify-content:space-between;padding:23px 25px 0;gap:18px}.lower-header h2{margin-top:4px}.tabs{display:flex;flex-wrap:wrap;gap:4px}.tab{border:0;border-bottom:2px solid transparent;background:transparent;color:var(--dim);padding:14px 17px;font-size:12px;font-weight:700}.tab.active{color:var(--goldbright);border-color:var(--gold)}.tab:hover{color:#f6e6ca}.desk-content{padding:23px 25px 28px;border-top:1px solid var(--border)}.dossier-heading{display:flex;align-items:start;justify-content:space-between;gap:16px}.dossier-heading h3{font-family:var(--serif);font-size:23px;font-weight:500;margin:8px 0}.dossier-heading .muted{font-size:11px}.assessment{font-size:9px;letter-spacing:1.2px;font-weight:800;border:1px solid #416052;padding:8px 12px;color:#9dceaf;border-radius:3px}.assessment.warning{border-color:#775c47;color:#e7c396}.assessment.unknown{border-color:#635b88;color:#c2afe0}.report-lead{margin-top:23px;background:#1b2c2e;padding:21px 24px;border-left:2px solid var(--gold)}.report-lead>span{font-size:10px;font-weight:800;letter-spacing:1.6px;color:var(--gold)}.report-lead p{font:500 18px/1.6 Georgia,serif;color:#f0e8db;margin-top:10px}.report-columns{display:grid;grid-template-columns:1.1fr 1fr;gap:30px;margin-top:27px}.dossier h4{font-size:11px;letter-spacing:1.4px;color:#bdab8a;text-transform:uppercase;margin-bottom:13px}.evidence{list-style:none;margin:0;padding:0}.evidence li{position:relative;padding:0 0 12px 19px;line-height:1.6;color:#d1dbd7;font-size:13px}.evidence li:before{content:'✦';position:absolute;left:0;top:2px;color:var(--gold);font-size:9px}.report-columns p,.methodology p{line-height:1.7;color:#c8d4d0}.methodology{padding:18px 0;margin-top:11px;border-top:1px solid var(--border)}.methodology p{font-size:12px;color:#9aadaa}.recommendation{background:#1b2b2b;border:1px solid #354940;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:18px 21px}.recommendation p{margin-top:9px;line-height:1.5}.census-head,.decrees-intro,.chronicle-head{display:flex;justify-content:space-between;align-items:center;gap:20px}.census-intro{max-width:660px}.census-intro p,.decrees-intro p{color:var(--dim);line-height:1.7;margin-top:8px;font-size:12px}.census-search{display:flex;align-items:center;gap:10px;border:1px solid var(--border2);background:#0e1d23;color:var(--gold);padding:0 12px;border-radius:3px;min-width:260px}.census-search span{font-size:22px}.census-search input{padding:13px 0;background:none;border:0;outline:none;color:var(--text);width:100%;font-size:12px}.census-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:19px 0}.census-metrics>div{background:#18282e;border:1px solid var(--border);padding:14px 17px}.census-metrics strong{font:500 23px var(--serif);display:block}.census-metrics span{color:var(--dim);font-size:10px}.census-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:15px}.table-wrap{min-width:0;max-height:520px;overflow:auto;border:1px solid var(--border)}.citizen-table{width:100%;border-collapse:collapse;text-align:left;white-space:nowrap}.citizen-table th{background:#1d3034;position:sticky;top:0;color:#b8c4bb;font-size:9px;letter-spacing:1.3px;padding:14px 11px}.citizen-table td{border-top:1px solid #2a3a3d;padding:12px 11px;color:#c7d6d2;font-size:11px}.citizen-table tr[data-citizen]{cursor:pointer}.citizen-table tr:hover,.citizen-table tr.active{background:#243c3b}.citizen-table td strong{color:#f1ede0}.avatar{display:inline-grid;place-items:center;background:#385249;color:#e4e8dd;border-radius:50%;width:28px;height:28px;margin-right:8px;font-family:var(--serif)}.microbar{display:inline-block;width:39px;height:4px;border-radius:10px;background:#374a48;margin-right:6px;vertical-align:middle}.microbar i,.progress i{background:#91b9a3;display:block;height:100%;border-radius:10px}.citizen-inspector{background:#192a30;border:1px solid var(--border2);padding:19px}.inspector-emblem{width:48px;height:48px;border:1px solid #a88e63;color:var(--goldbright);display:grid;place-items:center;font:500 27px var(--serif);margin-bottom:19px}.citizen-inspector h3{font:500 19px var(--serif);margin:8px 0}.citizen-inspector>.muted{font-size:11px}.inspector-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 10px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:18px 0;margin:17px 0}.inspector-grid small,.magic-notes small{display:block;color:var(--muted);font-size:9px;letter-spacing:1.2px;margin-bottom:5px}.inspector-grid strong{font-size:11px}.vital{display:grid;grid-template-columns:1fr auto;gap:6px;font-size:10px;letter-spacing:1px;margin-top:13px}.vital b{font-size:10px;color:var(--gold)}.progress{grid-column:span 2;height:5px;background:#354844;border-radius:9px}.magic-notes{margin:18px 0}.magic-notes p{color:var(--dim);font-size:11px;line-height:1.7}.outline-btn{width:100%;background:none;border:1px solid #817153;color:var(--gold);padding:12px;font-weight:700;font-size:11px}.outline-btn:hover{background:#253735}.empty-message{padding:28px!important;text-align:center;color:var(--muted)}.decrees-intro h3,.chronicle-head h3{font:500 22px var(--serif);margin-top:6px}.decree-counter{border:1px solid var(--border2);padding:13px;color:var(--gold);font-size:10px;white-space:nowrap;letter-spacing:1.3px}.policies{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:24px}.policy{border:1px solid #39484a;background:#192a30;display:flex;flex-direction:column;justify-content:space-between;min-height:226px;padding:17px}.policy-ministry{font-size:9px;letter-spacing:1.4px;color:var(--gold);font-weight:700}.policy h4{font:500 17px/1.45 var(--serif);margin:8px 0 10px}.policy p{font-size:12px;color:#aebfbb;line-height:1.6}.policy-bottom{border-top:1px solid #35484a;padding-top:12px;margin-top:15px;display:flex;gap:9px;align-items:end;justify-content:space-between}.policy-bottom span{font-size:10px;color:#c2ab84}.policy-button{background:#bfa16c;color:#18221f;border:0;padding:10px 12px;font-size:10px;font-weight:800;white-space:nowrap}.policy-button:hover:not(:disabled){background:#e0c18b}.chronicle-head .muted{font-size:11px}.timeline{margin-top:22px;max-width:900px}.timeline-entry{display:grid;grid-template-columns:54px 18px 1fr;gap:13px;min-height:77px}.timeline-year{font-family:var(--serif);color:var(--gold);font-size:12px}.timeline-node{position:relative;width:10px;height:10px;border:2px solid #a98b67;border-radius:100%;margin:4px}.timeline-node:after{content:'';position:absolute;height:100%;top:14px;left:3px;border-left:1px solid #435452;min-height:55px}.timeline-entry:last-child .timeline-node:after{display:none}.timeline-entry h4{font-size:13px;color:#edf2eb}.timeline-entry p{font-size:12px;color:var(--dim);line-height:1.6;margin:7px 0 20px}.timeline-entry.magic .timeline-node{border-color:#a69ed2}.timeline-entry.good .timeline-node,.timeline-entry.growth .timeline-node{border-color:#8aca9d}.toast{position:fixed;right:25px;bottom:24px;max-width:490px;min-width:250px;background:#264338;border:1px solid #739979;border-left:4px solid #b9d8a6;padding:15px 19px;z-index:20;box-shadow:0 20px 45px #0009;line-height:1.5;transform:translateY(110px);opacity:0;transition:transform .2s ease,opacity .2s ease;pointer-events:none}.toast.show{transform:translateY(0);opacity:1}.toast.bad{background:#523b36;border-color:#ae7e70}footer{padding:26px 3px;display:flex;justify-content:space-between;gap:15px;font-size:9px;letter-spacing:1.4px;color:#758b86}
+@media(max-width:1400px){.app{padding:0 18px}.top-center{display:none}.top-grid{grid-template-columns:minmax(0,1.6fr) minmax(290px,.95fr)}.summary-stat{gap:8px;padding:0 10px}.summary-stat strong{font-size:19px}.summary-stat small{font-size:9px}.world-frame{height:460px}.policies{grid-template-columns:repeat(2,1fr)}.ministry-link{padding:13px 6px;gap:7px}}
+@media(max-width:980px){.top-grid{grid-template-columns:1fr}.world-frame{height:490px}.summary-band{grid-template-columns:repeat(3,1fr);row-gap:22px}.summary-stat:nth-child(3){border:0}.ministry-nav{display:grid;grid-template-columns:repeat(2,1fr);gap:3px}.council-footer{margin-top:8px}.lower-header{display:block}.tabs{margin-top:18px}.census-layout{grid-template-columns:1fr}.citizen-inspector{max-width:none}}
+@media(max-width:650px){.app{padding:0 9px}.topbar{height:auto;flex-wrap:wrap;padding:13px 4px;gap:9px}.top-actions{width:100%;justify-content:space-between}.brand{font-size:20px;letter-spacing:2.4px}.brand small{display:none}.summary-band{grid-template-columns:repeat(2,1fr);padding:16px 0}.summary-stat{padding:7px 12px!important;border:0}.summary-stat:nth-child(odd){border-right:1px solid var(--border)}.summary-stat strong{font-size:19px}.top-grid{gap:10px}.panel-heading{padding:17px 14px 12px}h1,h2{font-size:19px}.pill{font-size:8px;padding:7px}.world-frame{margin:0 8px;height:370px}.world-note{font-size:8px;bottom:7px;left:7px;gap:4px;flex-wrap:wrap;max-width:80%}.world-flair{display:none}.map-foot{padding:12px}.foot-year{display:none}.ministry-nav{grid-template-columns:1fr}.lower{margin-top:11px}.lower-header{padding:20px 15px 0}.tab{padding:11px 9px;font-size:10px}.desk-content{padding:17px 13px}.report-columns{grid-template-columns:1fr;gap:15px}.report-lead{padding:14px}.report-lead p{font-size:15px}.dossier-heading h3{font-size:19px}.recommendation{display:block}.recommendation button{margin-top:15px}.census-head,.decrees-intro{display:block}.census-search{margin-top:17px;min-width:0}.census-metrics{grid-template-columns:repeat(2,1fr)}.policies{grid-template-columns:1fr}.policy{min-height:180px}footer{flex-wrap:wrap;line-height:1.6}.council-footer{flex-wrap:wrap}}
+
+.ai-report{margin-top:20px;padding:20px;border:1px solid #49504b;background:repeating-linear-gradient(135deg,#1b2b2b,#1b2b2b 15px,#1d2c2a 15px,#1d2c2a 30px)}.ai-report>div{display:flex;align-items:center;justify-content:space-between;gap:20px}.ai-report .outline-btn{width:auto;padding:10px 15px}.ai-report p{white-space:pre-wrap;line-height:1.8;margin-top:15px;color:#b8c6c0;font-size:12px;max-width:900px}@media(max-width:650px){.ai-report>div{display:block}.ai-report .outline-btn{margin-top:12px;width:100%}}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="identity"><div class="sigil">✦</div><div><div class="brand-overline">CHRONICLES OF</div><div class="brand">ELDORIA <small>THE LIVING KINGDOM</small></div></div></div>
+    <div class="top-center"><span class="muted">THE REALM OF CROWNMERE</span><span class="status-dot"></span><span class="live">AUTOSAVED</span></div>
+    <div class="top-actions"><span class="year-marker">YEAR <b id="year">1842</b></span><button id="newGame" class="small-ghost" title="Reset the game">↻ <span>New reign</span></button><button id="nextYear" class="button-primary"><span>Advance one year</span> <strong>→</strong></button></div>
+  </header>
+
+  <section class="summary-band" aria-label="Current kingdom statistics">
+    <div class="summary-stat"><span class="stat-icon">♙</span><div><span>POPULATION</span><strong id="metric-pop">26</strong><small id="metric-housing">26 / 28 housed</small></div></div>
+    <div class="summary-stat"><span class="stat-icon">◈</span><div><span>ROYAL TREASURY</span><strong id="metric-gold">420</strong><small id="metric-goldflow">+0 / year</small></div></div>
+    <div class="summary-stat"><span class="stat-icon">❦</span><div><span>GRAIN RESERVES</span><strong id="metric-grain">165</strong><small id="metric-foodflow">+0 / year</small></div></div>
+    <div class="summary-stat"><span class="stat-icon">⚙</span><div><span>EMPLOYMENT</span><strong id="metric-jobs">0%</strong><small id="metric-workers">Workers recorded</small></div></div>
+    <div class="summary-stat"><span class="stat-icon">✧</span><div><span>ARCANE AWAKENED</span><strong id="metric-magic">0</strong><small>From known potential</small></div></div>
+    <div class="summary-stat"><span class="stat-icon">♛</span><div><span>ROYAL AUTHORITY</span><strong id="metric-decisions">2 / 2</strong><small>Decrees remaining</small></div></div>
+  </section>
+
+  <main>
+    <section class="top-grid">
+      <div class="world-panel panel">
+        <div class="panel-heading"><div><div class="section-label"><span class="divider-star">✦</span> THE VISIBLE REALM</div><h1>Life in Crownmere <em>·</em> <span id="map-year">1842</span></h1></div><span class="pill"><span class="status-dot"></span> LIVE SIMULATION</span></div>
+        <div class="world-frame">
+          <canvas id="villageCanvas" aria-label="Interactive 3D model of Crownmere village; drag to orbit, scroll to zoom, click to inspect buildings" role="img"></canvas>
+          <div id="worldFallback" class="world-fallback" hidden>3D rendering is unavailable in this browser. The council, census, and simulation continue to work.</div>
+          <div class="world-note"><span class="mini-square">◎</span> DRAG TO ORBIT <span>·</span> SCROLL TO ZOOM <span>·</span> CLICK A BUILDING</div>
+          <div class="world-controls"><button id="zoomIn" aria-label="Zoom in">+</button><button id="zoomOut" aria-label="Zoom out">−</button><button id="resetCamera" aria-label="Reset camera">⟲</button></div>
+          <div class="map-compass"><strong>N</strong><span>✦</span><small>S</small></div>
+          <div class="world-flair">✧ THE FIRST VILLAGE ✧</div>
+        </div>
+        <div class="map-foot"><div id="selectionSummary"><span class="muted">Select a building on the map to inspect it.</span></div><span class="foot-year">ERA OF STEAM & SORCERY</span></div>
+      </div>
+
+      <aside class="council-panel panel">
+        <div class="panel-heading"><div><div class="section-label"><span class="divider-star">✦</span> THE ROYAL CABINET</div><h2>Council of Ministers</h2></div><span class="gold-glyph">♛</span></div>
+        <div class="royal-notice"><span class="notice-icon">♜</span><div><b>His Majesty’s Court</b><p>Ministers advise. <strong>Only you</strong> authorize policy.</p></div></div>
+        <div class="report-label"><span>MINISTRIES</span><span>ANNUAL INTELLIGENCE</span></div>
+        <nav id="ministryNav" class="ministry-nav" aria-label="Ministry reports"></nav>
+        <div class="council-footer"><div><span class="tiny">CURRENT SESSION</span><strong id="councilDecisions">2 royal decisions available</strong></div><button class="text-button" data-tab="decrees">Review decrees ↗</button></div>
+      </aside>
+    </section>
+
+    <section class="lower panel" id="royalDesk">
+      <div class="lower-header"><div><div class="section-label"><span class="divider-star">✦</span> THE KINGDOM'S RECORDS</div><h2 id="deskTitle">Ministry Intelligence</h2></div><nav class="tabs" aria-label="Kingdom records"><button class="tab active" data-tab="reports">Ministry reports</button><button class="tab" data-tab="citizens">Citizen census</button><button class="tab" data-tab="decrees">Royal decrees</button><button class="tab" data-tab="chronicle">Chronicle</button></nav></div>
+      <div id="deskContent" class="desk-content"></div>
+    </section>
+  </main>
+  <footer><span>ELDORIA / V0.2 — THE FIRST VILLAGE</span><span id="saveIndicator">LOCAL SIMULATION · SAVES AUTOMATICALLY</span><span>THE CROWN SHAPES HISTORY</span></footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){'use strict';
+const IS_STATIC_DEPLOYMENT=true;
+const engine=(function(){/** Eldoria v0.2. Pure deterministic annual simulation, independent of the 3D renderer. */
+const SAVE_VERSION = 2;
+const START_YEAR = 1842;
+const SPECIES = ['Human','Elf','Dwarf','Orc','Fae','Riverfolk'];
+const BUILDING_TYPES = {
+  cottage:    {label:'Home', jobs:0, beds:4, cost:65, color:'#b98b61', icon:'⌂'},
+  farm:       {label:'Farm', jobs:4, beds:0, cost:82, color:'#aa9b58', icon:'♧'},
+  sawmill:    {label:'Sawmill', jobs:2, beds:0, cost:95, color:'#a87050', icon:'⚒'},
+  foundry:    {label:'Foundry', jobs:3, beds:0, cost:110, color:'#9c6955', icon:'⚙'},
+  steamworks: {label:'Steamworks', jobs:3, beds:0, cost:135, color:'#777e86', icon:'♨'},
+  market:     {label:'Market', jobs:3, beds:0, cost:80, color:'#cc994b', icon:'◇'},
+  hall:       {label:'Royal Hall', jobs:2, beds:0, cost:180, color:'#ad8b8e', icon:'♛'},
+  watchtower: {label:'Watchtower', jobs:2, beds:0, cost:95, color:'#88939e', icon:'⚑'},
+  academy:    {label:'Academy', jobs:1, beds:0, cost:105, color:'#8d9cb4', icon:'✧'},
+  clinic:     {label:'Apothecary', jobs:1, beds:0, cost:100, color:'#91b29e', icon:'✚'},
+  observatory:{label:'Arcane Tower', jobs:1, beds:0, cost:120, color:'#8774bb', icon:'✦'},
+};
+const POLICIES = {
+  grain_imports:    {ministry:'Harvest', name:'Emergency Grain Charter', cost:45, desc:'Import 50 grain immediately. Safeguards reserves this year.', effect:'Food stores +50'},
+  housing_grants:  {ministry:'Population', name:'Private Housing Incentives', cost:65, desc:'Help local families and builders finance additional homes.', effect:'Housing construction + trust'},
+  guild_training:  {ministry:'Industry', name:'Industrial Guild Scholarships', cost:70, desc:'Fund workshops and apprenticeships for the next three years.', effect:'Productivity for 3 years'},
+  steam_investment:{ministry:'Industry', name:'Steam Modernization Grant', cost:100, desc:'Subsidize industrial steam technology and raise taxable output.', effect:'Industry + pollution'},
+  border_patrols:  {ministry:'Defense', name:'Frontier Patrol Mandate', cost:65, desc:'Strengthen the border guard and fund additional patrols.', effect:'Security +16'},
+  arcane_inquiry:  {ministry:'Arcane', name:'Charter of Self-Discovery', cost:55, desc:'Let researchers investigate magical awakening and inner potential.', effect:'Research + awakening chance'},
+  public_health:   {ministry:'Population', name:'Public Health Endowment', cost:70, desc:'Expand access to clinics, sanitation, and basic treatment.', effect:'Health +7'},
+  royal_levy:      {ministry:'Treasury', name:'Extraordinary Royal Levy', cost:0, desc:'Collect an emergency tax at the cost of public trust.', effect:'Gold +75 · trust −9'},
+};
+const NAMES = ['Elara','Tharion','Borin','Mira','Kael','Astra','Rudrik','Seren','Niva','Orlan','Fen','Isolde','Korin','Lyra','Tamsin','Bram','Ardan','Veya','Wren','Oskar','Yara','Galen','Sylva','Rian','Idra','Nolan','Maelis','Tarin','Erynd','Cora','Jorin','Vala','Dalen','Rosa','Sora','Avel'];
+const FAMILIES = ['Voss','Stone','Ashfall','Ironbark','Moonriver','Vale','Morrow'];
+const ABILITIES = ['Ember','Tide','Growth','Resonance','Memory','Light','Shadow','Storm'];
+const INITIAL_BUILDINGS = [
+  ['hall', 0,0], ['market',-2,10], ['steamworks',24,8], ['foundry',16,18], ['sawmill',24,-12],
+  ['farm',-26,-7], ['farm',-22,14], ['watchtower',17,-19], ['academy',-11,18],
+  ['clinic',8,-12], ['observatory',-17,-17],
+  ['cottage',-10,-7], ['cottage',-10,6], ['cottage',4,10], ['cottage',11,2],
+  ['cottage',-1,-14], ['cottage',-18,3], ['cottage',13,13]
+];
+const WORKS = { farm:'Farmer',sawmill:'Lumberworker',foundry:'Metalsmith',steamworks:'Steam Engineer',market:'Merchant',hall:'Civil Servant',watchtower:'Royal Guard',academy:'Teacher',clinic:'Healer',observatory:'Arcane Researcher' };
+const WAGES = {Farmer:9,Lumberworker:12,Metalsmith:14,'Steam Engineer':18,Merchant:12,'Civil Servant':13,'Royal Guard':11,Teacher:12,Healer:16,'Arcane Researcher':15};
+const round=(n)=>Math.round(n);
+const clamp=(n,a=0,b=100)=>Math.max(a,Math.min(b,n));
+const sum=(list,fn)=>list.reduce((t,x)=>t+fn(x),0);
+const rand=(state)=>{ let s=state.seed|0; s^=s<<13; s^=s>>>17; s^=s<<5; state.seed=s|0; return (s>>>0)/4294967296; };
+const pick=(state,array)=>array[Math.floor(rand(state)*array.length)];
+const idNext=(state,prefix)=>`${prefix}-${state.nextId++}`;
+const byId=(state,id)=>state.buildings.find(b=>b.id===id);
+const active=(state,name)=>state.effects.some(e=>e.name===name&&e.until>=state.year);
+function addHistory(state,title,detail,kind='info'){
+  state.history.unshift({id:idNext(state,'hist'),year:state.year,title,detail,kind});
+  state.history=state.history.slice(0,80);
+}
+function spawn(state,{age,homeId,species,name,family,magic}){
+  const talent=magic??(rand(state)<0.32?pick(state,ABILITIES):null);
+  const citizen={id:idNext(state,'person'),name:name||pick(state,NAMES),family:family||pick(state,FAMILIES),species:species||pick(state,SPECIES),age,
+    homeId,workplaceId:null,occupation:'Seeking Work',income:0,health:clamp(68+Math.floor(rand(state)*30)),
+    happiness:clamp(52+Math.floor(rand(state)*35)),magicPotential:talent,magicOrigin:talent?'inherited':null,awakened:!!talent&&rand(state)<0.28,
+    insight:round(rand(state)*25),education:round(rand(state)*85)};
+  state.citizens.push(citizen); return citizen;
+}
+function assignJobs(state){
+  const slots=state.buildings.flatMap(b=>Array.from({length:BUILDING_TYPES[b.type].jobs},()=>b));
+  // Retain existing employment where the corresponding building still has capacity.
+  for(const citizen of state.citizens){
+    if(citizen.age<16){citizen.workplaceId=null;citizen.occupation='Student';citizen.income=0;continue;}
+    if(citizen.age>=68){citizen.workplaceId=null;citizen.occupation='Retired';citizen.income=0;continue;}
+    const idx=slots.findIndex(b=>b.id===citizen.workplaceId);
+    if(idx>=0){ const b=slots.splice(idx,1)[0];citizen.occupation=WORKS[b.type];citizen.income=WAGES[citizen.occupation]; }
+    else {citizen.workplaceId=null;citizen.occupation='Seeking Work';citizen.income=0;}
+  }
+  for(const citizen of state.citizens){
+    if(citizen.occupation!=='Seeking Work') continue;
+    const b=slots.shift();if(!b)continue;
+    citizen.workplaceId=b.id;citizen.occupation=WORKS[b.type];citizen.income=WAGES[citizen.occupation];
+  }
+}
+function getSummary(state){
+  const citizens=state.citizens;
+  const p=citizens.length;
+  const beds=sum(state.buildings,b=>BUILDING_TYPES[b.type].beds);
+  const workers=citizens.filter(c=>c.age>=16&&c.age<68);
+  const employed=workers.filter(c=>c.workplaceId&&byId(state,c.workplaceId)).length;
+  const unemployed=workers.length-employed;
+  const students=citizens.filter(c=>c.age<16).length;
+  const retired=citizens.filter(c=>c.age>=68).length;
+  const farms=state.buildings.filter(b=>b.type==='farm').length;
+  const industry=state.buildings.filter(b=>['steamworks','foundry','sawmill'].includes(b.type)).length;
+  const goldGross=round(sum(citizens,c=>c.income)*0.19)+industry*5+(active(state,'steam_investment')?14:0)+(active(state,'guild_training')?7:0);
+  const upkeep=state.buildings.filter(b=>b.type!=='cottage').length*3+4+state.effects.filter(e=>e.until>=state.year).length*3;
+  const foodProduction=farms*27;
+  const foodDemand=round(p*1.3);
+  const netFood=foodProduction-foodDemand;
+  const magicBorn=citizens.filter(c=>!!c.magicPotential).length;
+  const awakened=citizens.filter(c=>c.awakened).length;
+  const homes=state.buildings.filter(b=>b.type==='cottage');
+  const rates={housing:p/(beds||1),employment:workers.length?employed/workers.length:1};
+  const data={population:p,beds,homes:homes.length,workers:workers.length,employed,unemployed,students,retired,
+    meanAge:p?round(sum(citizens,c=>c.age)/p):0,meanHappiness:p?round(sum(citizens,c=>c.happiness)/p):0,
+    meanHealth:p?round(sum(citizens,c=>c.health)/p):0,meanWage:employed?round(sum(citizens,c=>c.income)/employed):0,
+    taxRevenue:goldGross,upkeep,netGold:goldGross-upkeep,foodProduction,foodDemand,netFood,
+    foodCover:foodDemand?Number((state.resources.grain/foodDemand).toFixed(1)):0,
+    unemploymentRate:round((1-rates.employment)*100),housingRate:round(rates.housing*100),
+    enchanted:magicBorn,awakened,industry,farms,pollution:state.pollution,
+    gdp:round(sum(citizens,c=>c.income)*2.7+industry*30),citizensWithHomes:citizens.filter(c=>!!byId(state,c.homeId)).length,
+    treasury:state.resources.gold,grain:state.resources.grain,mana:state.resources.mana,
+    trust:state.stats.trust,security:state.stats.security,research:state.stats.research,
+    health:state.stats.health,prosperity:state.stats.prosperity};
+  return data;
+}
+function createInitialState(){
+  const state={version:SAVE_VERSION,realm:'Eldoria',city:'Crownmere',year:START_YEAR,seed:8759341,nextId:1,
+    resources:{gold:420,grain:165,mana:21},stats:{trust:68,security:58,health:77,prosperity:64,research:18},
+    pollution:8,buildings:[],citizens:[],history:[],effects:[],decisions:[],decisionsThisYear:0,annual:null};
+  INITIAL_BUILDINGS.forEach(([type,x,z])=>state.buildings.push({id:idNext(state,'building'),type,x,z,year:START_YEAR,origin:'founding'}));
+  const homes=state.buildings.filter(b=>b.type==='cottage');
+  for(let i=0;i<26;i++){
+    let age=i<6?8+i:i>23?69+(i-24)*3:18+(i*7)%44;
+    spawn(state,{age,homeId:homes[Math.floor(i/4)].id, name:NAMES[i],family:FAMILIES[Math.floor(i/4)]});
+  }
+  assignJobs(state);
+  state.annual={year:state.year,prevPopulation:state.citizens.length,births:0,deaths:0,arrivals:0,homesBuilt:0,events:[]};
+  addHistory(state,'The Royal Chronicle Begins','Twenty-six citizens of six peoples gather in Crownmere, a steam-age frontier settlement.','major');
+  addHistory(state,'The Ministries Convene','The Crown retains authority over all proposed policies.','council');
+  return state;
+}
+function approvePolicy(current,id){
+  const policy=POLICIES[id]; if(!policy)throw Error('Unknown policy.');
+  if(current.decisionsThisYear>=2)throw Error('The annual council has reached its two-major-decision limit. Advance the year to convene again.');
+  if(id!=='royal_levy'&&current.resources.gold<policy.cost)throw Error('The Royal Treasury cannot fund this proposal.');
+  if(['housing_grants','guild_training','arcane_inquiry','steam_investment'].includes(id)&&active(current,id))throw Error('This program is already active.');
+  const state=structuredClone(current);state.resources.gold-=policy.cost;
+  if(id==='grain_imports')state.resources.grain+=50;
+  if(id==='housing_grants'){state.stats.trust=clamp(state.stats.trust+3);state.effects.push({name:id,until:state.year+2});}
+  if(id==='guild_training')state.effects.push({name:id,until:state.year+2});
+  if(id==='steam_investment'){state.stats.prosperity=clamp(state.stats.prosperity+9);state.pollution=clamp(state.pollution+5);state.effects.push({name:id,until:state.year+3});}
+  if(id==='border_patrols')state.stats.security=clamp(state.stats.security+16);
+  if(id==='arcane_inquiry'){state.stats.research=clamp(state.stats.research+12);state.effects.push({name:id,until:state.year+3});}
+  if(id==='public_health'){state.stats.health=clamp(state.stats.health+7);for(const c of state.citizens)c.health=clamp(c.health+3);}
+  if(id==='royal_levy'){state.resources.gold+=75;state.stats.trust=clamp(state.stats.trust-9);}
+  state.decisionsThisYear++;
+  const record={id:idNext(state,'order'),year:state.year,policyId:id,name:policy.name,cost:policy.cost};
+  state.decisions.unshift(record);
+  addHistory(state,`Royal Assent: ${policy.name}`,`The Crown approved the ministry's proposal. ${policy.effect}.`,'royal');
+  return state;
+}
+function newHome(state){
+  const homes=state.buildings.filter(b=>b.type==='cottage').length;
+  const spots=[[-23,2],[-4,20],[20,2],[-5,-22],[23,22],[-18,23],[19,-27],[-32,10],[30,-6],[-12,-28],[-3,27],[28,16],[-28,-19]];
+  const [x,z]=spots[(homes-7)%spots.length];
+  state.buildings.push({id:idNext(state,'building'),type:'cottage',x:x+(homes>19?Math.floor((homes-7)/spots.length)*5:0),z,year:state.year,origin:'private'});
+}
+function availableHome(state){
+  const homes=state.buildings.filter(b=>b.type==='cottage');
+  const occ=new Map(homes.map(b=>[b.id,0]));
+  for(const c of state.citizens) if(occ.has(c.homeId))occ.set(c.homeId,occ.get(c.homeId)+1);
+  return homes.find(b=>occ.get(b.id)<BUILDING_TYPES.cottage.beds)?.id??null;
+}
+const EVENTS=[
+ {id:'caravan',title:'Foreign Caravan Arrives',detail:'Travelling traders bring coin and remarkable mechanical instruments.',weight:1,apply:s=>{s.resources.gold+=24;s.stats.prosperity=clamp(s.stats.prosperity+2);}},
+ {id:'blight',title:'Crop Blight',detail:'An unfamiliar rust damages the seasonal grain harvest.',weight:1,apply:s=>{s.resources.grain=Math.max(0,s.resources.grain-33);}},
+ {id:'spark',title:'Uncharted Arcane Surge',detail:'Unexplained magic awakens in an ordinary citizen.',weight:1,apply:s=>{let c=s.citizens.find(x=>x.magicPotential&&!x.awakened);if(c){c.awakened=true;c.insight=clamp(c.insight+24);s.stats.research=clamp(s.stats.research+4);}else s.resources.mana+=10;}},
+ {id:'machine',title:'Engine Breakdown',detail:'A steam-pressure accident temporarily damages industrial confidence.',weight:1,apply:s=>{s.stats.prosperity=clamp(s.stats.prosperity-4);s.pollution=clamp(s.pollution+2);}},
+ {id:'festival',title:'People’s Lantern Festival',detail:'Neighborhoods organize a festival and celebrate the diverse city.',weight:1,apply:s=>{s.stats.trust=clamp(s.stats.trust+4);s.citizens.forEach(c=>c.happiness=clamp(c.happiness+2));}},
+ {id:'border',title:'Frontier Incursion',detail:'Scouts detect raiders beyond the northern wood.',weight:1,apply:s=>{s.stats.security=clamp(s.stats.security-7);}},
+ {id:'quiet',title:'An Unusually Peaceful Year',detail:'No major crisis interrupts the rhythms of civic life.',weight:1,apply:s=>{}},
+];
+function advanceYear(current){
+  if(!validateState(current))throw Error('Unsupported or damaged save state.');
+  const state=structuredClone(current);
+  const old=getSummary(state);const beforePeople=state.citizens.length;
+  state.year++;
+  state.decisionsThisYear=0;
+  state.effects=state.effects.filter(e=>e.until>=state.year);
+  state.resources.gold=Math.max(0,state.resources.gold+old.netGold);
+  state.resources.grain=Math.max(0,state.resources.grain+old.netFood);
+  state.resources.mana+=3+state.buildings.filter(b=>b.type==='observatory').length*4;
+  state.stats.prosperity=clamp(state.stats.prosperity+(old.netGold>=0?1:-3)-(state.pollution>=45?2:0));
+  state.stats.trust=clamp(state.stats.trust+(old.unemploymentRate>25?-2:1));
+  // Organic development: private households build when demand is high; no royal build button required.
+  let homesBuilt=0;
+  if(old.housingRate>=82 && state.stats.prosperity>=42 && (rand(state)<(active(state,'housing_grants')?0.98:0.87))){
+    newHome(state);homesBuilt=1;
+    addHistory(state,'A New Street Takes Shape','Private families have financed a new row of cottages in response to housing demand.','growth');
+  }
+  const mortality=[];
+  for(const citizen of state.citizens){
+    citizen.age++;
+    const chance=citizen.age>=80?0.15:citizen.age>=68?0.04:citizen.health<35?0.027:0.002;
+    if(rand(state)<chance)mortality.push(citizen.id);
+    citizen.health=clamp(citizen.health+(state.stats.health>=65?1:-2)-(state.pollution>35?2:0));
+    citizen.happiness=clamp(citizen.happiness+(state.stats.trust>55?1:-2)+(state.resources.grain===0?-12:0));
+    if(!citizen.magicPotential&&citizen.age>=13&&rand(state)<(active(state,'arcane_inquiry')?.035:.009)){
+      citizen.magicPotential=pick(state,ABILITIES);citizen.magicOrigin='self-discovered';citizen.awakened=true;citizen.insight+=18;
+      addHistory(state,'A New Form of Magic',`${citizen.name} ${citizen.family} developed ${citizen.magicPotential.toLowerCase()} magic through self-discovery, without a known inherited gift.`,'magic');
+    }
+    if(citizen.magicPotential&&!citizen.awakened&&rand(state)<(active(state,'arcane_inquiry')?.14:.025)){
+      citizen.awakened=true;citizen.insight=clamp(citizen.insight+17);
+      addHistory(state,'Magical Awakening',`${citizen.name} ${citizen.family} discovered an inner gift for ${citizen.magicPotential.toLowerCase()} magic.`,'magic');
+    }
+  }
+  state.citizens=state.citizens.filter(c=>!mortality.includes(c.id));
+  const births=Math.min(2,Math.max(0,Math.floor(state.citizens.length/19)));
+  let actualBirths=0;
+  for(let i=0;i<births;i++){
+    let homeId=availableHome(state);
+    if(!homeId || state.resources.grain===0)break;
+    const parent=state.citizens.find(c=>c.homeId===homeId&&c.age>=18&&c.age<50);
+    spawn(state,{age:0,homeId,family:parent?.family,name:pick(state,NAMES),species:parent?.species,magic:parent?.magicPotential&&rand(state)<0.45?parent.magicPotential:undefined}); actualBirths++;
+  }
+  let arrivals=0;
+  if(state.stats.prosperity>=48 && state.stats.trust>=40 && availableHome(state) && rand(state)<0.85){
+    const homeId=availableHome(state);spawn(state,{age:20+Math.floor(rand(state)*25),homeId}); arrivals=1;
+  }
+  assignJobs(state);
+  if(state.resources.grain===0){state.stats.trust=clamp(state.stats.trust-12);state.citizens.forEach(c=>c.health=clamp(c.health-7));}
+  const event=pick(state,EVENTS); event.apply(state);
+  addHistory(state,event.title,event.detail,event.id==='festival'||event.id==='caravan'?'good':'world');
+  const stats=getSummary(state);
+  state.annual={year:state.year,prevPopulation:beforePeople,births:actualBirths,deaths:mortality.length,arrivals,homesBuilt,events:[event.title]};
+  addHistory(state,`Year ${state.year} concluded`,`${actualBirths} births · ${mortality.length} deaths · ${arrivals} arrivals · ${homesBuilt} new homes. Population ${stats.population}.`,'annual');
+  return state;
+}
+function getMinistryReports(state){
+ const s=getSummary(state);
+ const baseline=(v)=>v>=0?`+${v}`:String(v);
+ return [
+  {id:'treasury',icon:'◈',name:'Royal Treasury',minister:'Chancellor Maelis Fenwick',grade:s.netGold<0?'warning':'stable',metric:`${baseline(s.netGold)} gold / year`,summary:`Projected revenue is ${s.taxRevenue} gold against ${s.upkeep} in civic obligations. Current reserves stand at ${s.treasury}.`,evidence:[`Estimated civic output (not a national-accounts measure): ${s.gdp} units.`,`Mean employed wage: ${s.meanWage} gold.`,`Fiscal balance: ${s.taxRevenue} − ${s.upkeep} = ${baseline(s.netGold)} gold.`],scenario:`Holding rates and employment fixed, next year's treasury would be approximately ${Math.max(0,s.treasury+s.netGold)} gold before policy costs and unplanned events.`,caveat:'Output is a simplified model index, not observed GDP. No external empire trade, inflation, or borrowing modeled yet.',recommendation:s.netGold<0?'Protect reserves and reassess spending.':'Maintain a reserve before authorizing major investments.',policyIds:['royal_levy','steam_investment']},
+  {id:'population',icon:'♟',name:'Population & Public Health',minister:'Dr. Elara Quill',grade:s.housingRate>95||s.unemploymentRate>30?'warning':'stable',metric:`${s.population} residents`,summary:`Crownmere has ${s.population} registered people, ${s.beds} beds and ${s.homes} homes. Housing occupancy is ${s.housingRate}%.`,evidence:[`${s.employed} employed among ${s.workers} working-age people; ${s.unemploymentRate}% unemployment.`,`Student roles: ${s.students}; retired residents: ${s.retired}.`,`Mean health: ${s.meanHealth}/100; mean happiness: ${s.meanHappiness}/100.`],scenario:`With no new homes, there are ${Math.max(0,s.beds-s.population)} available places. Natural births and migration may be constrained by capacity.`,caveat:'Health and happiness are modeled attributes. Mortality and migration are stochastic; the figures do not establish causality.',recommendation:s.housingRate>=85?'Encourage organic housing growth before crowding becomes severe.':'Monitor household demand and access to services.',policyIds:['housing_grants','public_health']},
+  {id:'harvest',icon:'❦',name:'Agriculture & Provisions',minister:'Agronomist Tharion Reed',grade:s.netFood<0||s.foodCover<1.4?'warning':'stable',metric:`${baseline(s.netFood)} food / year`,summary:`The farms produce ${s.foodProduction} food units annually against modeled demand of ${s.foodDemand}. Reserves are ${s.grain}.`,evidence:[`${s.farms} working farms at 27 units each before temporary policies.`,`Food reserve coverage: ${s.foodCover} years at this year's demand, before next harvest.`,`Net annual food production: ${baseline(s.netFood)} units.`],scenario:`A hypothetical 35% harvest loss would reduce production to ${Math.round(s.foodProduction*0.65)} units, making the annual balance ${baseline(Math.round(s.foodProduction*0.65)-s.foodDemand)}.`,caveat:'Food demand is a simplified per-capita proxy; reserves are a stock, production is a yearly flow.',recommendation:s.netFood<0?'Consider emergency grain imports and agricultural improvements.':'Preserve strategic grain reserves against unpredictable harvest shocks.',policyIds:['grain_imports']},
+  {id:'industry',icon:'⚙',name:'Industry & Infrastructure',minister:'Chief Engineer Borin Kest',grade:s.unemploymentRate>35?'warning':'stable',metric:`${s.industry} industrial sites`,summary:`Steam industry is emerging, supported by ${s.industry} major productive sites. Workforce capacity limits output.`,evidence:[`Recorded employment: ${s.employed} of ${s.workers} eligible workers.`,`Prosperity index: ${s.prosperity}/100.`,`Pollution index: ${s.pollution}/100.`],scenario:'Training may increase productivity in the short run; steam investment may improve fiscal prospects while increasing environmental costs.',caveat:'Industrial output, transport capacity, and technology diffusion are deliberately abstract in v0.2.',recommendation:'Balance guild training and steam modernization against environmental and budgetary pressure.',policyIds:['guild_training','steam_investment']},
+  {id:'defense',icon:'⚑',name:'Defense & Intelligence',minister:'Marshal Korr Vane',grade:s.security<50?'warning':'stable',metric:`${s.security}/100 security`,summary:`The security index is ${s.security}/100. The city maintains ${state.buildings.filter(b=>b.type==='watchtower').length} watchtower.`,evidence:[`${state.citizens.filter(c=>c.occupation==='Royal Guard').length} employed royal guards.`,`Yearly political decisions remaining: ${2-state.decisionsThisYear}.`,'No foreign-army strength estimates are available.'],scenario:'Frontier incursions may cause security losses. Patrol orders offer immediate resilience, but military campaigns are not simulated yet.',caveat:'Military comparisons against rival empires are out of scope for this build.',recommendation:s.security<60?'Authorize additional frontier patrols.':'Continue reconnaissance and reserve capacity for emergencies.',policyIds:['border_patrols']},
+  {id:'arcane',icon:'✧',name:'Arcane Studies',minister:'Archmagister Sylva Aster',grade:'unknown',metric:`${s.awakened} awakened`,summary:`The census records ${s.enchanted} citizens with known magical potential, of whom ${s.awakened} have awakened. Inner discovery is highly individual.`,evidence:[`Research index: ${s.research}/100.`,`Mana reserves: ${s.mana}.`,`Awakened share of inhabitants: ${s.population?Math.round(100*s.awakened/s.population):0}%.`],scenario:'A charter for self-discovery may increase the chance of awakening, but individual breakthroughs remain unpredictable.',caveat:'Unlimited magical potential does not mean unlimited immediate power; no universal magic ceiling is imposed.',recommendation:'Develop observation, ethics, and voluntary research before prescribing one method of magical growth.',policyIds:['arcane_inquiry']},
+ ];
+}
+function citizenDisplay(c){return `${c.name} ${c.family}`;}
+function homeLabel(state,id){const b=byId(state,id);return b?`${BUILDING_TYPES[b.type].label} ${b.id.split('-').pop()}`:'Unknown';}
+function validateState(s){
+ return !!s&&s.version===2&&Number.isInteger(s.year)&&Number.isInteger(s.nextId)&&Array.isArray(s.citizens)&&Array.isArray(s.buildings)&&Array.isArray(s.history)&&Array.isArray(s.decisions)&&Array.isArray(s.effects)&&!!s.resources&&!!s.stats&&s.citizens.every(c=>!!c.id&&!!c.homeId&&s.buildings.some(b=>b.id===c.homeId&&b.type==='cottage'))&&s.buildings.every(b=>!!BUILDING_TYPES[b.type]&&Number.isFinite(b.x)&&Number.isFinite(b.z));
+}
+
+return {createInitialState,approvePolicy,advanceYear,getSummary,getMinistryReports,POLICIES,BUILDING_TYPES,validateState,citizenDisplay,homeLabel};})();
+const worldModule=(function(){/** Lightweight dependency-free WebGL village renderer.
+ * Actual 3D meshes, perspective camera, depth testing, orbit/zoom and projected picking.
+ * No external network dependency or WebGL framework required.
+ */
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const sub=(a,b)=>a.map((v,i)=>v-b[i]);
+const dot=(a,b)=>a.reduce((s,v,i)=>s+v*b[i],0);
+const norm=(a)=>{const n=Math.hypot(...a)||1;return a.map(v=>v/n)};
+const hex=(h)=>[parseInt(h.slice(1,3),16)/255,parseInt(h.slice(3,5),16)/255,parseInt(h.slice(5,7),16)/255];
+const rgb=(r,g,b)=>[r/255,g/255,b/255];
+function perspective(fov,aspect,near,far){const f=1/Math.tan(fov/2),nf=1/(near-far);return [f/aspect,0,0,0,0,f,0,0,0,0,(far+near)*nf,-1,0,0,2*far*near*nf,0];}
+function lookAt(eye,target){const z=norm(sub(eye,target)),x=norm(cross([0,1,0],z)),y=cross(z,x);return [x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-dot(x,eye),-dot(y,eye),-dot(z,eye),1];}
+function mul(a,b){const o=Array(16).fill(0);for(let c=0;c<4;c++)for(let r=0;r<4;r++)for(let k=0;k<4;k++)o[c*4+r]+=a[k*4+r]*b[c*4+k];return o;}
+function mulVec(m,v){return [0,1,2,3].map(r=>m[r]*v[0]+m[4+r]*v[1]+m[8+r]*v[2]+m[12+r]*v[3]);}
+class Shapes {
+ constructor(){this.v=[];}
+ tri(a,b,c,color){const n=norm(cross(sub(b,a),sub(c,a)));for(const p of [a,b,c])this.v.push(...p,...n,...color);}
+ quad(a,b,c,d,color){this.tri(a,b,c,color);this.tri(a,c,d,color);}
+ box(x,y,z,w,h,d,color){const x1=x-w/2,x2=x+w/2,z1=z-d/2,z2=z+d/2,y2=y+h;
+ this.quad([x1,y,z2],[x2,y,z2],[x2,y2,z2],[x1,y2,z2],color);
+ this.quad([x2,y,z1],[x1,y,z1],[x1,y2,z1],[x2,y2,z1],color);
+ this.quad([x1,y,z1],[x1,y,z2],[x1,y2,z2],[x1,y2,z1],color);
+ this.quad([x2,y,z2],[x2,y,z1],[x2,y2,z1],[x2,y2,z2],color);
+ this.quad([x1,y2,z2],[x2,y2,z2],[x2,y2,z1],[x1,y2,z1],color);
+ this.quad([x1,y,z1],[x2,y,z1],[x2,y,z2],[x1,y,z2],color);
+ }
+ gable(x,y,z,w,d,rise,color){const x1=x-w/2,x2=x+w/2,z1=z-d/2,z2=z+d/2,top=y+rise;
+ this.quad([x1,y,z1],[x1,y,z2],[x,top,z2],[x,top,z1],color);
+ this.quad([x,top,z1],[x,top,z2],[x2,y,z2],[x2,y,z1],color);
+ this.tri([x1,y,z2],[x2,y,z2],[x,top,z2],color);
+ this.tri([x2,y,z1],[x1,y,z1],[x,top,z1],color);
+ }
+ cyl(x,y,z,r,h,color,sides=9){for(let i=0;i<sides;i++){const t=i*2*Math.PI/sides,t2=(i+1)*2*Math.PI/sides;const a=[x+r*Math.cos(t),y,z+r*Math.sin(t)],b=[x+r*Math.cos(t2),y,z+r*Math.sin(t2)];this.quad(a,b,[b[0],y+h,b[2]],[a[0],y+h,a[2]],color);this.tri([x,y+h,z],[a[0],y+h,a[2]],[b[0],y+h,b[2]],color);}}
+ cone(x,y,z,r,h,color,sides=10){for(let i=0;i<sides;i++){const t=i*2*Math.PI/sides,t2=(i+1)*2*Math.PI/sides;this.tri([x+r*Math.cos(t),y,z+r*Math.sin(t)],[x+r*Math.cos(t2),y,z+r*Math.sin(t2)],[x,y+h,z],color);}}
+}
+function pseudo(i){const x=Math.sin(i*103.43+19.17)*9347.113;return x-Math.floor(x)}
+function generate(state,selected){const g=new Shapes();
+ const earth=rgb(65,94,78),grass=rgb(73,113,87),grass2=rgb(83,122,92),road=rgb(155,137,111),water=rgb(56,121,143),fence=rgb(119,86,61);
+ g.box(0,-1.75,0,110,1.7,90,earth);
+ // Patchwork of low polygon ground tiles, with tiny elevation differences.
+ for(let i=0;i<22;i++)for(let j=0;j<18;j++){
+ const x=-52.5+i*5,z=-42.5+j*5;let c=pseudo(i*37+j*23)>.57?grass:grass2;
+ g.box(x,-0.09+(pseudo(i+j*70)-.5)*.025,z,4.98,.1,4.98,c);
+ }
+ // Meandering stream to the west and a rustic crossing.
+ for(let j=0;j<17;j++){let z=-42+j*5,x=-38+Math.sin(j*.62)*3;g.box(x,.025,z,5,.075,5.15,water);}
+ g.box(-38,.16,0,14,.34,5,road);
+ for(let z of [-1.8,1.8])g.box(-38,.43,z,14,.2,.22,fence);
+ // Broad roads, market lanes and distant village trail.
+ g.box(0,.06,0,5,.12,74,road);g.box(0,.07,0,80,.12,4.4,road);
+ g.box(12,.06,11,2.5,.12,28,road);g.box(-12,.06,6,2.7,.12,32,road);
+ g.box(-7,.04,-14,44,.11,2.4,road);
+ // Fields with visible crop stripes.
+ for(const [x,z] of [[-26,-7],[-22,14]]){for(let k=0;k<5;k++){g.box(x-5+k*2.2,.1,z-6,1.1,.18,8,rgb(96+k*2,124+k,64));}}
+ // Spruce and deciduous trees, clustered beyond village center.
+ for(let i=0;i<140;i++){
+ const x=-51+pseudo(i+17)*102,z=-40+pseudo(i+200)*80;
+ if(Math.hypot(x,z)<23||Math.abs(x+38)<6||state.buildings.some(b=>Math.hypot(b.x-x,b.z-z)<6.4))continue;
+ const r=1.1+pseudo(i+390)*1.3,h=3+pseudo(i+480)*2.8;
+ g.cyl(x,0,z,.38,h*.38,rgb(95,76,61),6);
+ g.cone(x,h*.18,z,r,h*.9,pseudo(i+100)>.4?rgb(41,96,72):rgb(52,115,78),8);
+ }
+ for(const b of state.buildings){const chosen=b.id===selected;const w=b.type==='hall'?9:b.type==='steamworks'?9:b.type==='farm'?8:b.type==='foundry'?7: b.type==='cottage'?4.1:6;
+ const d=b.type==='hall'?8:b.type==='farm'?5:b.type==='cottage'?3.8:5.4;
+ const tint=chosen?rgb(216,184,109):hex(({cottage:'#ad8563',farm:'#a19667',hall:'#a5a2a5',market:'#b58b69',steamworks:'#92979d',foundry:'#937c70',watchtower:'#858c9a',observatory:'#9390b9',academy:'#a7a49a',clinic:'#90a89d',sawmill:'#b18b6e'})[b.type]);
+ const roof=hex(({cottage:'#703f39',farm:'#866d43',hall:'#466273',market:'#96704f',steamworks:'#555965',foundry:'#634c4c',watchtower:'#485264',observatory:'#665b91',academy:'#536e79',clinic:'#4f8474',sawmill:'#735d44'})[b.type]);
+ const height= b.type==='hall'?5.1:b.type==='steamworks'?4.7:b.type==='watchtower'?8:b.type==='observatory'?6.2:b.type==='foundry'?4.5:3.2;
+ g.box(b.x,0,b.z,w,height,d,tint);
+ if(!['watchtower','observatory'].includes(b.type))g.gable(b.x,height,b.z,w+.6,d+.7,2,roof);
+ else {g.cone(b.x,height,b.z,w*.72,3.6,roof);}
+ if(!['farm','watchtower'].includes(b.type)){for(let v of [-1,1]){
+ const wx=b.x+v*(w*.26);g.box(wx,1.75,b.z+d/2+.045,.72,1.1,.13,rgb(231,190,109));
+ g.box(wx,2.32,b.z+d/2+.11,.78,.13,.15,rgb(75,76,76));}}
+ if(b.type==='steamworks'||b.type==='foundry'){g.cyl(b.x+w*.31,height-1,b.z-d*.22,.82,6.5,rgb(95,82,80));g.cyl(b.x-w*.22,height,b.z-d*.28,.65,3.5,rgb(113,94,82));}
+ if(b.type==='hall'){g.box(b.x,4.5,b.z-2.4,3,4,3,rgb(169,157,152));g.cone(b.x,8.5,b.z-2.4,2.1,3.2,rgb(187,141,77));}
+ if(b.type==='market'){for(let s=-1;s<=1;s++){g.box(b.x+s*2,.3,b.z+2,1.7,1.7,1.8,rgb(158,105,72));g.gable(b.x+s*2,2,b.z+2,2,2,1,rgb(195,134+s*12,91));}}
+ if(b.type==='observatory'){g.cyl(b.x,height+2.5,b.z,.48,.6,rgb(185,156,233));g.cone(b.x,height+3,b.z,1,1.8,rgb(168,112,222));}
+ if(b.type==='farm'){g.box(b.x+4,.2,b.z+3,2,1,2,rgb(154,134,71));}
+ if(chosen){ // illuminated selection plinth
+  g.box(b.x,-.01,b.z,w+1,.12,d+1,rgb(243,190,106));
+ }
+ }
+ // Tiny residents visible on the road as colored 3D figures (homes remain selectable).
+ state.citizens.forEach((c,i)=>{
+  const angle=i*2.3999,rad=3+(i%10)*2.1;const x=Math.cos(angle)*rad,z=Math.sin(angle)*rad;
+  if(Math.abs(x)>31||Math.abs(z)>30)return;
+  const col=hex(({Human:'#d9b7a1',Elf:'#9ddcba',Dwarf:'#e8ba7a',Orc:'#a9b887',Fae:'#b0a1e6',Riverfolk:'#91c4d9'})[c.species]);
+  g.cyl(x,.1,z,.30,.85,col,7);g.cone(x,.94,z,.34,.52,rgb(52,69,75),7);
+ });
+ // Antique bronze border to frame the realm.
+ for(const z of [-45,45])g.box(0,.11,z,110,.28,.4,rgb(105,91,68));
+ for(const x of [-55,55])g.box(x,.11,0,.4,.28,90,rgb(105,91,68));
+ return new Float32Array(g.v);
+}
+const VERT=`attribute vec3 aPosition;attribute vec3 aNormal;attribute vec3 aColor;uniform mat4 uMVP;varying vec3 vColor;varying float vLight;void main(){gl_Position=uMVP*vec4(aPosition,1.);vColor=aColor;vLight=.45+.55*max(dot(normalize(aNormal),normalize(vec3(.5,.85,.35))),0.);}`;
+const FRAG=`precision mediump float;varying vec3 vColor;varying float vLight;void main(){gl_FragColor=vec4(vColor*vLight,1.);}`;
+function makeShader(gl,type,source){const sh=gl.createShader(type);gl.shaderSource(sh,source);gl.compileShader(sh);if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(sh));return sh;}
+function initWorld(canvas,options){
+ let gl=null,program,buffer,count=0,mvp=[],camera={theta:-.62,pitch:.77,distance:93,target:[0,0,0]};
+ try{gl=canvas.getContext('webgl',{antialias:true,alpha:false,preserveDrawingBuffer:false});
+  if(!gl)throw Error('WebGL is unavailable');
+  program=gl.createProgram();gl.attachShader(program,makeShader(gl,gl.VERTEX_SHADER,VERT));gl.attachShader(program,makeShader(gl,gl.FRAGMENT_SHADER,FRAG));gl.linkProgram(program);
+  if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Shader link failed');
+  buffer=gl.createBuffer();gl.enable(gl.DEPTH_TEST);
+ }catch(e){canvas.hidden=true;options.onError?.(e.message);return {update(){},focus(){},destroy(){}};}
+ let state=options.state,selected=null,disposed=false,drag=null,previous=null;
+ function update(next){state=next;const data=generate(state,selected);gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,data,gl.STATIC_DRAW);count=data.length/9;draw();}
+ function draw(){if(disposed)return;
+  const dpr=Math.min(devicePixelRatio||1,2),width=Math.max(1,Math.round(canvas.clientWidth*dpr)),height=Math.max(1,Math.round(canvas.clientHeight*dpr));
+  if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;}
+  gl.viewport(0,0,width,height);gl.clearColor(.055,.10,.13,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+  let cx=Math.sin(camera.theta)*Math.cos(camera.pitch)*camera.distance,
+      cz=Math.cos(camera.theta)*Math.cos(camera.pitch)*camera.distance,
+      cy=Math.sin(camera.pitch)*camera.distance;
+  mvp=mul(perspective(.78,width/height,.5,300),lookAt([cx+camera.target[0],cy+camera.target[1],cz+camera.target[2]],camera.target));
+  gl.useProgram(program);gl.uniformMatrix4fv(gl.getUniformLocation(program,'uMVP'),false,new Float32Array(mvp));gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
+  const stride=9*4;for(const [key,offset] of [['aPosition',0],['aNormal',3],['aColor',6]]){
+    const loc=gl.getAttribLocation(program,key);if(loc<0)continue;gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,3,gl.FLOAT,false,stride,offset*4);
+  }
+  gl.drawArrays(gl.TRIANGLES,0,count);
+ }
+ function screenPoint(x,y,z){const v=mulVec(mvp,[x,y,z,1]);if(v[3]<=0)return null;return {x:(v[0]/v[3]*.5+.5)*canvas.clientWidth,y:(.5-v[1]/v[3]*.5)*canvas.clientHeight};}
+ const down=(ev)=>{drag={x:ev.clientX,y:ev.clientY,theta:camera.theta,pitch:camera.pitch,moved:false};canvas.setPointerCapture?.(ev.pointerId);};
+ const move=(ev)=>{if(!drag)return;let dx=ev.clientX-drag.x,dy=ev.clientY-drag.y;drag.moved ||= Math.abs(dx)+Math.abs(dy)>5;
+  camera.theta=drag.theta-dx*.008;camera.pitch=clamp(drag.pitch+dy*.007,.20,1.43);draw();};
+ const up=(ev)=>{if(!drag)return;const moved=drag.moved;drag=null;
+  if(moved)return;const rect=canvas.getBoundingClientRect();const px=ev.clientX-rect.left,py=ev.clientY-rect.top;
+  let match=null,best=30;for(const b of state.buildings){const point=screenPoint(b.x,2.3,b.z);if(!point)continue;const dist=Math.hypot(point.x-px,point.y-py);
+    if(dist<best){best=dist;match=b;}}
+  if(match){selected=match.id;update(state);options.onSelect?.(match);}
+ };
+ const wheel=(ev)=>{ev.preventDefault();camera.distance=clamp(camera.distance+Math.sign(ev.deltaY)*5,36,160);draw();};
+ canvas.addEventListener('pointerdown',down);canvas.addEventListener('pointermove',move);canvas.addEventListener('pointerup',up);canvas.addEventListener('wheel',wheel,{passive:false});
+ const resizeObserver=typeof ResizeObserver!=='undefined'?new ResizeObserver(draw):null;resizeObserver?.observe(canvas);
+ update(state);
+ return {update,focus(id){selected=id;update(state);},zoom(v){camera.distance=clamp(camera.distance+v,36,160);draw();},resetCamera(){camera={theta:-.62,pitch:.77,distance:93,target:[0,0,0]};draw();},destroy(){disposed=true;resizeObserver?.disconnect();canvas.removeEventListener('pointerdown',down);canvas.removeEventListener('pointermove',move);canvas.removeEventListener('pointerup',up);canvas.removeEventListener('wheel',wheel);}};
+}
+
+return {initWorld};})();
+const {createInitialState,approvePolicy,advanceYear,getSummary,getMinistryReports,POLICIES,BUILDING_TYPES,validateState,citizenDisplay,homeLabel}=engine;const {initWorld}=worldModule;
+const $=(s)=>document.querySelector(s);
+const escape=(s)=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const SAVE_KEY='eldoria-living-kingdom-v2';
+let state,tab='reports',ministry='treasury',selectedBuilding=null,selectedCitizen=null,search='';
+try {const raw=JSON.parse(localStorage.getItem(SAVE_KEY));state=validateState(raw)?raw:createInitialState();}catch{state=createInitialState();}
+const canvas=$('#villageCanvas');
+const world=initWorld(canvas,{state,onSelect:(b)=>{selectedBuilding=b.id;renderMapSelection();},onError:(err)=>{$('#worldFallback').hidden=false;console.warn(err);}});
+function save(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(state));$('#saveIndicator').textContent=`SAVED · YEAR ${state.year}`;}catch{$('#saveIndicator').textContent='LOCAL SAVE UNAVAILABLE';}}
+function toast(message,bad=false){const n=$('#toast');n.textContent=message;n.className=`toast show ${bad?'bad':''}`;clearTimeout(toast.timer);toast.timer=setTimeout(()=>n.classList.remove('show'),4500);}
+function fmt(n){return Number(n).toLocaleString('en-US');}
+function signed(n){return `${n>=0?'+':''}${fmt(n)}`;}
+function goTab(next){tab=next;renderDesk();$('#royalDesk').scrollIntoView({behavior:'smooth',block:'start'});}
+function renderTop(){const s=getSummary(state);
+ $('#year').textContent=state.year;$('#map-year').textContent=state.year;
+ $('#metric-pop').textContent=fmt(s.population);$('#metric-housing').textContent=`${s.population} / ${s.beds} housed`;
+ $('#metric-gold').textContent=fmt(s.treasury);$('#metric-goldflow').textContent=`${signed(s.netGold)} / year`;
+ $('#metric-grain').textContent=fmt(s.grain);$('#metric-foodflow').textContent=`${signed(s.netFood)} / year`;
+ $('#metric-jobs').textContent=`${s.workers?Math.round(100*s.employed/s.workers):100}%`;
+ $('#metric-workers').textContent=`${s.employed} of ${s.workers} working-age`;
+ $('#metric-magic').textContent=s.awakened;$('#metric-decisions').textContent=`${2-state.decisionsThisYear} / 2`;
+ $('#councilDecisions').textContent=`${2-state.decisionsThisYear} royal decisions available`;
+}
+function renderNav(){const reports=getMinistryReports(state);
+ $('#ministryNav').innerHTML=reports.map(r=>`<button data-ministry="${r.id}" class="ministry-link ${ministry===r.id?'selected':''}" aria-pressed="${ministry===r.id}"><span class="ministry-emoji">${r.icon}</span><span class="ministry-link-body"><strong>${escape(r.name)}</strong><small>${escape(r.minister)}</small></span><span class="ministry-metric ${r.grade==='warning'?'warning':''}">${escape(r.metric)}</span><span class="ministry-arrow">›</span></button>`).join('');
+}
+function renderMapSelection(){const b=state.buildings.find(x=>x.id===selectedBuilding);if(!b){$('#selectionSummary').innerHTML='<span class="muted">Select a building on the map to inspect it.</span>';return;}
+ const residents=state.citizens.filter(c=>c.homeId===b.id);
+ const workers=state.citizens.filter(c=>c.workplaceId===b.id);
+ $('#selectionSummary').innerHTML=`<div class="selected-map"><span class="selected-icon">${BUILDING_TYPES[b.type].icon}</span><div><strong>${escape(BUILDING_TYPES[b.type].label)} · Site ${escape(b.id.split('-').pop())}</strong><small>${b.type==='cottage'?`${residents.length} residents / ${BUILDING_TYPES[b.type].beds} beds`:`${workers.length} workers / ${BUILDING_TYPES[b.type].jobs} posts`} · ${b.origin==='private'?'Privately built':'Founding settlement'}</small></div></div>${residents.length?`<button class="text-button" data-home="${escape(b.id)}">Inspect residents ↗</button>`:''}`;
+}
+function reportHtml(r){return `<div class="dossier">
+ <div class="dossier-heading"><div><span class="tagline">ANNUAL REPORT · YEAR ${state.year}</span><h3>${r.icon} ${escape(r.name)}</h3><span class="muted">Prepared by ${escape(r.minister)} for the Royal Council</span></div><span class="assessment ${r.grade}">${r.grade==='warning'?'ATTENTION':r.grade==='unknown'?'UNCERTAIN':'MONITORED'}</span></div>
+ <div class="report-lead"><span>EXECUTIVE ASSESSMENT</span><p>${escape(r.summary)}</p></div>
+ <div class="report-columns"><div><h4>01 / Empirical record</h4><ul class="evidence">${r.evidence.map(e=>`<li>${escape(e)}</li>`).join('')}</ul></div><div><h4>02 / Scenario analysis</h4><p>${escape(r.scenario)}</p></div></div>
+ <div class="methodology"><h4>03 / Methodological limitations</h4><p>${escape(r.caveat)}</p></div>
+ <div class="recommendation"><div><span class="tagline">MINISTERIAL RECOMMENDATION</span><p>${escape(r.recommendation)}</p></div><button class="text-button" data-tab="decrees">Review proposals ↗</button></div>
+ <div class="ai-report"><div><span class="tagline">OPTIONAL GENERATIVE INTELLIGENCE</span><button class="outline-btn" data-ai-brief="${r.id}">✧ Generate AI research briefing</button></div><p id="aiBriefText">The metrics above are computed locally. An AI-written interpretation requires an OPENAI_API_KEY configured on the server; AI cannot change your kingdom.</p></div>
+ </div>`;}
+function citizensHtml(){const s=getSummary(state);return `<div class="census-head"><div class="census-intro"><span class="tagline">THE PEOPLE OF CROWNMERE</span><p>Every row is an individual with an actual home and an occupation or life-stage role. Homes and employment are linked to real sites on the 3D map.</p></div><label class="census-search"><span>⌕</span><input id="citizenSearch" type="search" placeholder="Search name, job, species…" value="${escape(search)}" aria-label="Search citizens"></label></div>
+ <div class="census-metrics"><div><strong>${s.population}</strong><span>Registered residents</span></div><div><strong>${s.homes}</strong><span>Residential buildings</span></div><div><strong>${s.workers}</strong><span>Working age</span></div><div><strong>${s.unemploymentRate}%</strong><span>Unemployment</span></div></div>
+ <div class="census-layout"><div class="table-wrap"><table class="citizen-table"><thead><tr><th>PERSON</th><th>SPECIES</th><th>AGE</th><th>ROLE / JOB</th><th>HOME</th><th>WELLBEING</th><th>MAGIC</th></tr></thead><tbody id="citizenRows"></tbody></table></div><aside id="citizenInspector" class="citizen-inspector"></aside></div>`;}
+function drawCitizenRows(){const entries=state.citizens.filter(c=>(`${citizenDisplay(c)} ${c.occupation} ${c.species}`).toLowerCase().includes(search.toLowerCase()));
+ $('#citizenRows').innerHTML=entries.map(c=>`<tr data-citizen="${escape(c.id)}" class="${selectedCitizen===c.id?'active':''}" tabindex="0" title="Inspect ${escape(citizenDisplay(c))}"><td><span class="avatar">${escape(c.name[0])}</span> <strong>${escape(citizenDisplay(c))}</strong></td><td>${escape(c.species)}</td><td>${c.age}</td><td>${escape(c.occupation)}</td><td>${escape(homeLabel(state,c.homeId))}</td><td><span class="microbar"><i style="width:${c.happiness}%"></i></span><small>${c.happiness}</small></td><td>${c.awakened?'✦ Awakened':c.magicPotential?'Latent':'—'}</td></tr>`).join('')||'<tr><td colspan="7" class="empty-message">No citizens match your search.</td></tr>';
+ drawCitizenInspector();}
+function drawCitizenInspector(){const c=state.citizens.find(x=>x.id===selectedCitizen) || state.citizens[0];
+ if(!c){$('#citizenInspector').innerHTML='No residents';return;}
+ selectedCitizen=c.id;
+ const site=state.buildings.find(b=>b.id===c.workplaceId);
+ $('#citizenInspector').innerHTML=`<div class="inspector-emblem">${escape(c.name.slice(0,1))}</div><span class="tagline">CITIZEN PROFILE / ${escape(c.id.toUpperCase())}</span><h3>${escape(citizenDisplay(c))}</h3><div class="muted">${escape(c.species)} · Age ${c.age}</div>
+ <div class="inspector-grid"><div><small>OCCUPATION</small><strong>${escape(c.occupation)}</strong></div><div><small>ANNUAL WAGE</small><strong>${c.income} gold</strong></div><div><small>RESIDENCE</small><strong>${escape(homeLabel(state,c.homeId))}</strong></div><div><small>WORKPLACE</small><strong>${escape(site?BUILDING_TYPES[site.type].label:'—')}</strong></div></div>
+ <div class="vital"><span>HEALTH</span><b>${c.health}/100</b><div class="progress"><i style="width:${c.health}%"></i></div></div><div class="vital"><span>HAPPINESS</span><b>${c.happiness}/100</b><div class="progress"><i style="width:${c.happiness}%"></i></div></div>
+ <div class="magic-notes"><small>MAGICAL PROFILE</small><p>${c.magicPotential?`${escape(c.magicPotential)} affinity · ${c.awakened?'awakened':'not yet awakened'} · ${c.magicOrigin==='self-discovered'?'self-developed':'inherited'} gift. Insight ${c.insight}.`:'No known magical gift. Future self-discovery remains possible.'}</p></div>
+ <button class="outline-btn" data-focus="${escape(c.homeId)}">Locate home on map ↗</button>`;
+}
+function policyAllowed(id){return state.decisionsThisYear<2&&state.resources.gold>=POLICIES[id].cost&&!(['housing_grants','guild_training','arcane_inquiry','steam_investment'].includes(id)&&state.effects.some(e=>e.name===id&&e.until>=state.year));}
+function decreesHtml(){return `<div class="decrees-intro"><div><span class="tagline">THE KING'S AUTHORITY</span><h3>${2-state.decisionsThisYear} major decisions remaining this year</h3><p>Ministers cannot act without royal approval. All policies have visible costs, and your decisions enter the royal chronicle.</p></div><span class="decree-counter">${state.decisionsThisYear} / 2 ENACTED</span></div>
+ <div class="policies">${Object.entries(POLICIES).map(([id,p])=>`<article class="policy"><div><span class="policy-ministry">${escape(p.ministry.toUpperCase())} MINISTRY</span><h4>${escape(p.name)}</h4><p>${escape(p.desc)}</p></div><div class="policy-bottom"><span>${escape(p.effect)}</span><button data-policy="${escape(id)}" ${policyAllowed(id)?'':'disabled'} class="policy-button">${p.cost?`Authorize · ${p.cost}g`:'Authorize · +75g'}</button></div></article>`).join('')}</div>`;}
+function chronicleHtml(){return `<div class="chronicle-head"><div><span class="tagline">ARCHIVES OF THE CROWN</span><h3>The kingdom remembers</h3></div><span class="muted">${state.history.length} recorded events</span></div><div class="timeline">${state.history.map(h=>`<div class="timeline-entry ${escape(h.kind)}"><span class="timeline-year">${h.year}</span><span class="timeline-node"></span><div><h4>${escape(h.title)}</h4><p>${escape(h.detail)}</p></div></div>`).join('')}</div>`;}
+function renderDesk(){const labels={reports:'Ministry Intelligence',citizens:'Census of Citizens',decrees:'The Royal Decrees',chronicle:'Historical Chronicle'};
+ $('#deskTitle').textContent=labels[tab];document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+ const content=$('#deskContent');
+ if(tab==='reports')content.innerHTML=reportHtml(getMinistryReports(state).find(x=>x.id===ministry));
+ if(tab==='citizens'){content.innerHTML=citizensHtml();drawCitizenRows();}
+ if(tab==='decrees')content.innerHTML=decreesHtml();
+ if(tab==='chronicle')content.innerHTML=chronicleHtml();
+}
+function render(){renderTop();renderNav();renderDesk();renderMapSelection();world.update(state);save();}
+function approved(id){try{state=approvePolicy(state,id);render();toast(`Royal assent granted: ${POLICIES[id].name}`);}catch(e){toast(e.message,true);}}
+async function generateAI(id){
+ const target=$('#aiBriefText'),button=document.querySelector('[data-ai-brief]');
+ if(!target)return;
+ if(typeof IS_STATIC_DEPLOYMENT!=='undefined'&&IS_STATIC_DEPLOYMENT){
+  target.textContent='AI-written briefings are unavailable on this static website. The verified ministry reports and the entire kingdom simulation remain playable. Hosting the optional AI API requires a secure backend.';
+  button.disabled=true;return;
+ }
+ button.disabled=true;target.textContent='Consulting the royal research office…';
+ try {
+  const report=getMinistryReports(state).find(r=>r.id===id);
+  const resp=await fetch('/api/briefing',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({report,year:state.year})});
+  const data=await resp.json();if(!resp.ok)throw Error(data.error||'AI unavailable');
+  // If the player changed ministry or year during the request, don't display a stale result.
+  if(tab==='reports'&&ministry===id&&state.year===data.year&&document.querySelector('#aiBriefText')){
+    document.querySelector('#aiBriefText').textContent=data.text;
+  }
+ } catch(err){if(document.querySelector('#aiBriefText'))document.querySelector('#aiBriefText').textContent=err.message;}
+ finally{if(document.querySelector('[data-ai-brief]'))document.querySelector('[data-ai-brief]').disabled=false;}
+}
+function nextYear(){try{state=advanceYear(state);const {births,deaths,arrivals,homesBuilt,events}=state.annual;render();toast(`${state.year}: ${births} births · ${deaths} deaths · ${arrivals} arrivals · ${homesBuilt} homes · ${events.join(', ')}`);}catch(e){toast(e.message,true);}}
+document.addEventListener('click',ev=>{const btn=ev.target.closest('button');if(!btn||btn.disabled)return;
+ if(btn.dataset.ministry){ministry=btn.dataset.ministry;tab='reports';renderNav();renderDesk();$('#royalDesk').scrollIntoView({behavior:'smooth',block:'start'});}
+ else if(btn.dataset.tab)goTab(btn.dataset.tab);
+ else if(btn.dataset.policy)approved(btn.dataset.policy);
+ else if(btn.dataset.aiBrief)generateAI(btn.dataset.aiBrief);
+ else if(btn.dataset.home){selectedCitizen=state.citizens.find(c=>c.homeId===btn.dataset.home)?.id||null;goTab('citizens');}
+ else if(btn.dataset.focus){selectedBuilding=btn.dataset.focus;world.focus(selectedBuilding);renderMapSelection();$('.world-panel').scrollIntoView({behavior:'smooth',block:'start'});}
+ else if(btn.id==='nextYear')nextYear();
+ else if(btn.id==='newGame'){if(!confirm('Begin a new reign? This will erase your current local save.'))return;state=createInitialState();selectedBuilding=null;selectedCitizen=null;ministry='treasury';tab='reports';render();toast('A new reign has begun.');}
+ else if(btn.id==='zoomIn')world.zoom(-12);
+ else if(btn.id==='zoomOut')world.zoom(12);
+ else if(btn.id==='resetCamera')world.resetCamera();
+});
+document.addEventListener('input',ev=>{if(ev.target.id==='citizenSearch'){search=ev.target.value;drawCitizenRows();}});
+document.addEventListener('click',ev=>{const tr=ev.target.closest('tr[data-citizen]');if(tr){selectedCitizen=tr.dataset.citizen;drawCitizenRows();}});
+document.addEventListener('keydown',ev=>{if((ev.key==='Enter'||ev.key===' ')&&ev.target.matches('tr[data-citizen]')){ev.preventDefault();selectedCitizen=ev.target.dataset.citizen;drawCitizenRows();}});
+render();
+})();
+</script>
+</body>
+</html>
